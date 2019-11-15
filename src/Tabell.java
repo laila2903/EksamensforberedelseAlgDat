@@ -1,6 +1,7 @@
 import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Random;
 
 public class Tabell {
@@ -544,6 +545,84 @@ public class Tabell {
         return n1 - n2;
     }
 
+    public static <T extends Comparable<? super T>> int maks(T[] a)
+    {
+        int m = 0;                     // indeks til største verdi
+        T maksverdi = a[0];            // største verdi
+
+        for (int i = 1; i < a.length; i++) if (a[i].compareTo(maksverdi) > 0)
+        {
+            maksverdi = a[i];  // største verdi oppdateres
+            m = i;             // indeks til største verdi oppdaters
+        }
+        return m;  // returnerer posisjonen til største verdi
+    } // maks
+
+    public static <T extends Comparable<? super T>> void innsettingssortering(T[] a)
+    {
+        for (int i = 1; i < a.length; i++)  // starter med i = 1
+        {
+            T verdi = a[i];        // verdi er et tabellelemnet
+            int  j = i - 1;        // j er en indeks
+            // sammenligner og forskyver:
+            for (; j >= 0 && verdi.compareTo(a[j]) < 0 ; j--) a[j+1] = a[j];
+
+            a[j + 1] = verdi;      // j + 1 er rett sortert plass
+        }
+    }
+
+    public static void skriv(Object[] a, int fra, int til){
+        fratilKontroll(a.length,fra,til);
+
+        if (til - fra > 0) {
+            System.out.print(a[fra]);
+        }
+
+        for (int i = fra + 1; i < til; i++) {
+            System.out.print(" " + a[i]);
+        }
+    }
+
+    public static void skriv (Object[] a){
+        skriv(a,0,a.length);
+    }
+
+    public static void skrivln (Object [] a, int fra, int til){
+
+        fratilKontroll(a.length,fra,til);
+
+        for (int i = fra; i < til; i++) {
+            System.out.print(a[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void skrivln (Object [] a){
+        skrivln(a,0,a.length);
+    }
+
+    public static void bytt(Object[] a, int i, int j)
+    {
+        Object temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
+    public static Integer[] randPermInteger(int n)
+    {
+        Integer[] a = new Integer[n];               // en Integer-tabell
+        Arrays.setAll(a, i -> i + 1);               // tallene fra 1 til n
+
+        Random r = new Random();   // hentes fra  java.util
+
+        for (int k = n - 1; k > 0; k--)
+        {
+            int i = r.nextInt(k+1);  // tilfeldig tall fra [0,k]
+            bytt(a,k,i);             // bytter om
+        }
+        return a;  // tabellen med permutasjonen returneres
+    }
+
 
     public static void main(String[] args) {
 
@@ -609,8 +688,41 @@ public class Tabell {
         int retval = a.compareTo(b);
         System.out.println(retval);*/
 
-        String s = "C", t = "c";
-        System.out.println(s.compareTo(t));
+        //String s = "C", t = "c";
+        //System.out.println(s.compareTo(t));
+
+        //System.out.println(Boolean.compare(false, true));
+
+       /* String[] s = {"Per","Kari","Ole","Anne","Ali","Eva"};
+        Tabell.innsettingssortering(s);
+        System.out.println(Arrays.toString(s));  // [Ali, Anne, Eva, Kari, Ole, Per]*/
+
+        //System.out.println(Integer.compare(-1, 1));
+        //System.out.println(Integer.compareUnsigned(-1, 1));
+        /**
+         * Metodekallet Integer.compare(-1, 1); returnerer -1. Det er slik det skal være siden -1 er mindre 1. Men metodekallet Integer.compareUnsigned(-1, 1); returnerer 1.
+         * Binærkoden til -1 har 32 1-biter. Men det er tallet 4294967295 når vi ser bort fra fortegn. Men 4294967295 er større enn 1. Dermed returnerer metoden 1.
+         */
+
+       /* Integer[] a = Tabell.randPermInteger(10);
+        System.out.println(Arrays.toString(a));
+
+        Tabell.innsettingssortering(a);
+        System.out.println(Arrays.toString(a));*/
+
+        double[] d = {5.7,3.14,7.12,3.9,6.5,7.1,7.11};
+        Double [] b = new Double[d.length];
+        for (int i = 0; i<b.length; i++){
+            b[i] = d[i];
+        }
+        System.out.println(Arrays.toString(b));
+        innsettingssortering(b);
+        System.out.println(Arrays.toString(b));
+
+
+
+
+
 
 
 
