@@ -494,6 +494,56 @@ public class Tabell {
         return m;  // returnerer posisjonen til største verdi
     }
 
+    /**
+     * Hvis to tegn sammenlignes ved hjelp av en logisk operator, er det tegnenes ascii-verdier som sammenlignes.
+     * Det betyr at av to tegn er det "størst" som alfabetisk kommer sist av de to. En maks-metode for en char-tabell kan dermed lages slik:
+     */
+
+    public static int maks(char[] c)
+    {
+        int m = 0;                    // indeks til "største" tegn
+        char maksverdi = c[0];        // "største" tegn
+
+        for (int i = 1; i < c.length; i++) if (c[i] > maksverdi)
+        {
+            maksverdi = c[i];     // "største" tegn oppdateres
+            m = i;                // indeks til "største" tegn oppdaters
+        }
+        return m;     // returnerer posisjonen til "største" tegn
+
+    }
+
+    public static int maks(Integer[] a)
+    {
+        int m = 0;
+        Integer maksverdi = a[0];
+
+        for (int i = 1; i < a.length; i++) if (a[i].compareTo(maksverdi)>0)
+        {
+            maksverdi = a[i];
+            m = i;
+        }
+        return m;
+
+    }
+
+    public static int sammenlign(String s1, String s2)
+    {
+        int n1 = s1.length();    // lengden til s1
+        int n2 = s2.length();    // lengden til s2
+
+        int n = n1 < n2 ? n1 : n2;    // den minste av n1 og n2
+
+        for (int i = 0; i < n; i++)
+        {
+            char c1 = s1.charAt(i);
+            char c2 = s2.charAt(i);
+
+            if (c1 != c2) return c1 - c2;
+        }
+        return n1 - n2;
+    }
+
 
     public static void main(String[] args) {
 
@@ -543,15 +593,25 @@ public class Tabell {
         System.out.println("Utvalgssortering: " + tid1);
         System.out.println("Innsettingssortering: " + tid2);*/
 
-        int[] a = {5,2,7,3,9,1,8,4,6};
-        double[] d = {5.7,3.14,7.12,3.9,6.5,7.1,7.11};
+        //int[] a = {5,2,7,3,9,1,8,4,6};
+       /* double[] d = {5.7,3.14,7.12,3.9,6.5,7.1,7.11};
         String[] s = {"Sohil","Per","Thanh","Fatima","Kari","Jasmin"};
+        char[] c = "JASMIN".toCharArray();
+        Integer[] a = {5,2,7,3,9,1,8,4,6};
 
         int k = Tabell.maks(a);     // posisjonen til den største i a
         int l = Tabell.maks(d);     // posisjonen til den største i d
         int m = Tabell.maks(s);     // posisjonen til den største i s
 
-        System.out.println(a[k] + "  " + d[l] + "  " + s[m]);
+        System.out.println(a[k] + "  " + d[l] + "  " + c[m]);*/
+
+        /*Integer a = 50, b = 56;
+        int retval = a.compareTo(b);
+        System.out.println(retval);*/
+
+        String s = "C", t = "c";
+        System.out.println(s.compareTo(t));
+
 
 
 
