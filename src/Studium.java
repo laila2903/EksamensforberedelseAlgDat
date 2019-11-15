@@ -6,6 +6,7 @@ public enum Studium  // legges under package eksempelklasser
     Enkeltemne ("Enkeltemnestudent");    // enumkonstanten Enkeltemne
 
     private final String fulltnavn;      // instansvariabel
+
     private Studium(String fulltnavn) { this.fulltnavn = fulltnavn; }
 
     public String toString() { return fulltnavn; }
