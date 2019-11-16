@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public enum Måned {
 
     JAN (1,"Januar"),
@@ -21,10 +23,55 @@ public enum Måned {
         this.fulltnavn = fulltnavn;
     }
 
+    public int mndnr() { return mndnr; }
 
+    @Override
+    public String toString (){
+        return fulltnavn;
+    }
 
+    public static String toString(int mnd)
+    {
+        if (mnd < 1 || mnd > 12) throw
+                new IllegalArgumentException("Ulovlig måndesnummer!");
 
+        return values()[mnd - 1].toString();
+    }
 
+    public static Måned[] vår()
+    {
+        return Arrays.copyOfRange(values(),3,5);
+    }
 
+    public static Måned[] sommer()
+    {
+        return Arrays.copyOfRange(values(),5,8);
+    }
+
+    public static Måned[] høst()
+    {
+        return Arrays.copyOfRange(values(),8,10);
+    }
+
+    public static Måned[] vinter()
+    {
+        return new Måned[] { NOV, DES, JAN, FEB, MAR };
+    }
+
+    public static void main(String... args)
+    {
+        for (Måned m : Måned.vår())
+        {
+            System.out.println(m.toString() + " (" + m.name() + ") " + m.mndnr());
+        }
+
+    }
 
 }
+
+
+
+
+
+
+
