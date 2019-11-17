@@ -194,10 +194,17 @@ public class Program {
         //Tabell.innsettingssortering(p,Komparator.orden(Person::etternavn));
         //System.out.println(Arrays.toString(p));
 
-        String[] s = {"Lars","Anders","Bodil","Kari","Per","Berit"};
+        /*String[] s = {"Lars","Anders","Bodil","Kari","Per","Berit"};
         //Tabell.innsettingssortering(s, Komparator.naturligOrden());
         Tabell.innsettingssortering(s, Komparator.orden(x -> -x.length()));  //returnerer navn sortert fra lengste string til korteste
-        System.out.println(Arrays.toString(s));
+        System.out.println(Arrays.toString(s));*/
+
+        /*String [] g = {"21","18","8","13","20","6","16","25","3","10"};
+        Tabell.innsettingssortering(g,Komparator.orden(String::length).deretter(x->x));
+        System.out.println(Arrays.toString(g));*/
+
+
+
 
 
 

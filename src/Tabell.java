@@ -664,10 +664,72 @@ public class Tabell {
 
     }  // maks
 
+    public static int a (int n){
 
-    public static void main(String[] args) {
+        if (n < 0) throw new IllegalArgumentException("n er negativ!");
 
+        int x = 0, y =1, z=1;
+
+        for (int i = 0; i<n; i++){
+            z=2*y+3*x;
+            x=y;
+            y=z;
+        }
+        return z;
     }
+
+    public static int tverrsum(int n){
+
+        int sum = 0;
+
+        while (n>0) {
+            sum = sum + n % 10;
+            n = n/10;
+        }
+        return sum;
+    }
+
+    public static int sifferrot (int n){
+        while (n >= 10) {
+            n = tverrsum(n);
+        }
+        return n;
+    }
+
+    public static int kvadratsum (int n){
+        if (n == 1) return 1;
+        else return kvadratsum(n-1) + n*n;
+    }
+    // Formel:  n*(n + 1)*(2*n + 1)/6
+
+    public static int sum (int k, int n){
+        if (n == k) return n;
+        int m = (n + k)/2;
+        return sum(n,m) + sum(m+1,k);
+    }
+
+    public static int maks3(int[] a, int v, int h)
+    {
+        if (v == h) return v;
+        int m = (v + h)/2;  // midten
+        int mv = maks3(a,v,m);
+        int mh = maks3(a,m+1,h);
+
+        return a[mv] >= a[mh] ? mv : mh;
+    }
+
+    public static int maks4(int[] a)
+    {
+        return maks3(a,0,a.length-1);
+    }
+
+    public static int fakultet(int n)
+    {
+        return n < 2 ? 1 : fakultet(n-1)*n;
+    }
+
+
+    public static void main(String[] args) { }
 
 }
 

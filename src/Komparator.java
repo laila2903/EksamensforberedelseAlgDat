@@ -1,11 +1,15 @@
 @FunctionalInterface                // legges i mappen eksempelklasser
 public interface Komparator<T>      // et funksjonsgrensesnitt
 {
-    int compare(T o1, T o2);          // en abstrakt metode
+    // Den abstrakte metoden:
+
+    int compare(T o1, T o2);
+
+    // Statiske metoder:
 
     public static <T extends Comparable<? super T>> Komparator<T> naturligOrden()
     {
-        return (x, y) -> x.compareTo(y);
+        return (x,y) -> x.compareTo(y);
     }
 
     public static <T extends Comparable<? super T>> Komparator<T> omvendtOrden()
@@ -25,4 +29,45 @@ public interface Komparator<T>      // et funksjonsgrensesnitt
         return (x, y) -> c.compare(velger.anvend(x), velger.anvend(y));
     }
 
+    // Default metoder
+
+    default Komparator<T> deretter(Komparator<? super T> c)
+    {
+        return (x, y) ->
+        {
+            int k = compare(x, y);
+            return k != 0 ? k : c.compare(x, y);
+        };
+    }
+
+    default <R extends Comparable<? super R>>
+    Komparator<T> deretter(Funksjon<? super T, ? extends R> velger)
+    {
+        return (x, y) ->
+        {
+            int k = compare(x, y);
+            return k != 0 ? k : velger.anvend(x).compareTo(velger.anvend(y));
+        };
+    }
+
+    default <R> Komparator<T>
+    deretter(Funksjon<? super T, ? extends R> velger, Komparator<? super R> c)
+    {
+        return (x, y) ->
+        {
+            int k = compare(x, y);
+            return k != 0 ? k : c.compare(velger.anvend(x), velger.anvend(y));
+        };
+    }
+
+    default Komparator<T> omvendt()
+    {
+        return (x, y) -> compare(y, x);  // bytter x og y
+    }
+
+    /*
+     * Lambda-uttrykket x -> x representerer det som i matematikk kalles identitetsfunksjonen, dvs. funksjonen f som er slik at f(x) = x.
+     * Det betyr at det ordnes mhp. x og det er samme som naturlig ordning siden x er en instans av en sammenlignbar type.
+     * Dermed er Komparator.orden(x -> x) og Komparator.naturligOrden() det samme.
+     */
 }
