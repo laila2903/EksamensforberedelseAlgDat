@@ -679,13 +679,9 @@ public class Tabell {
     }
 
     public static int tverrsum(int n){
-
-        int sum = 0;
-
-        while (n>0) {
-            sum = sum + n % 10;
-            n = n/10;
-        }
+        System.out.println("tverrsum(" + n + ") starter!");
+        int sum = (n < 10) ? n : tverrsum(n / 10) + (n % 10);
+        System.out.println("tverrsum(" + n + ") er ferdig!");
         return sum;
     }
 
@@ -727,6 +723,59 @@ public class Tabell {
     {
         return n < 2 ? 1 : fakultet(n-1)*n;
     }
+
+    public static int fib(int n)         // det n-te Fibonacci-tallet
+    {
+        if (n <= 1) return n;              // fib(0) = 0, fib(1) = 1
+        else return fib(n-1) + fib(n-2);   // summen av de to foregående
+    }
+
+    public static int euklid(int a, int b)
+    {
+        System.out.println("euklid(" + a + b + ") starter!");
+        if (b == 0) return a;
+        int r = a % b;            // r er resten
+        System.out.println("euklid(" + a + b + ") er ferdig!");
+        return euklid(b,r);       // rekursivt kall
+    }
+
+    public static void kvikksortering0(int[] a, int v, int h)
+    {
+        System.out.println("Kallet med [" + v + ":" + h + "] starter!");
+        if (v >= h) return;   // tomt eller maks ett element
+        int k = sParter0(a,v,h,(v + h)/2);   // se Programkode 1.3.9 f)
+        kvikksortering0(a,v,k-1);
+        kvikksortering0(a,k+1,h);
+        System.out.println("Kallet med [" + v + ":" + h + "] er ferdig!");
+    }
+
+    public static void kvikksortering(int[] a) // sorterer hele tabellen
+    {
+        if (a.length > 1) kvikksortering0(a, 0, a.length - 1);
+    }
+
+    private static int sParter0(int[] a, int v, int h, int indeks)
+    {
+        bytt(a, indeks, h);           // skilleverdi a[indeks] flyttes bakerst
+        int pos = parter0(a, v, h - 1, a[h]);  // partisjonerer a[v:h - 1]
+        bytt(a, pos, h);              // bytter for å få skilleverdien på rett plass
+        return pos;                   // returnerer posisjonen til skilleverdien
+    }
+
+    private static int parter0(int[] a, int v, int h, int skilleverdi)
+    {
+        while (true)                                  // stopper når v > h
+        {
+            while (v <= h && a[v] < skilleverdi) v++;   // h er stoppverdi for v
+            while (v <= h && a[h] >= skilleverdi) h--;  // v er stoppverdi for h
+
+            if (v < h) bytt(a,v++,h--);                 // bytter om a[v] og a[h]
+            else  return v;  // a[v] er nåden første som ikke er mindre enn skilleverdi
+        }
+    }
+
+
+
 
 
     public static void main(String[] args) { }

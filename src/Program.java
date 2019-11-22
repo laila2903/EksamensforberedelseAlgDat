@@ -1,6 +1,7 @@
 import sun.tools.jconsole.Tab;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Program {
 
@@ -202,6 +203,14 @@ public class Program {
         /*String [] g = {"21","18","8","13","20","6","16","25","3","10"};
         Tabell.innsettingssortering(g,Komparator.orden(String::length).deretter(x->x));
         System.out.println(Arrays.toString(g));*/
+
+
+        //int [] a = Tabell.randPerm(10);
+       //Tabell.kvikksortering(a);
+
+
+
+
 
 
 
